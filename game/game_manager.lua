@@ -5,7 +5,7 @@ local nata = require 'nata'
 function GameManager:new()
 	self.pool = nata.new()
 	local Player = require "player"
-	self.player = Player()
+	self.player = Player(self)
 	self.pool:queue(self.player)
 	local SimpleEnemy = require "simple_enemy"
 	self.pool:queue(SimpleEnemy(500, 500, self))

@@ -2,8 +2,8 @@ local Entity = require "entity"
 local Player = Entity:extend()
 local speed = 100
 
-function Player:new()
-	Player.super.new(self, 100, 100, "player")
+function Player:new(gm)
+	Player.super.new(self, 100, 100, 10, "player", gm)
 end
 
 function Player:draw()

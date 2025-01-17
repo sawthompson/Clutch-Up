@@ -1,15 +1,25 @@
 local Object = require("classic")
 local Entity = Object:extend()
 
-function Entity:new(x, y, name)
+function Entity:new(x, y, rad, name, gm)
 	self.x = x
 	self.y = y
 	self.toRemove = false;
 	self.name = name
+	self.gm = gm
+	self.rad = rad
 end
 
 function Entity:banish()
 	self.toRemove = true
+end
+
+function Entity:getGM()
+	return self.gm
+end
+
+function Entity:getRad()
+	return self.rad
 end
 
 function Entity:shouldRemove()
