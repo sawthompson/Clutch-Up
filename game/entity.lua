@@ -4,14 +4,14 @@ local Entity = Object:extend()
 function Entity:new(x, y, rad, name, gm)
 	self.x = x
 	self.y = y
-	self.toRemove = false;
+	self.to_remove = false;
 	self.name = name
 	self.gm = gm
 	self.rad = rad
 end
 
 function Entity:banish()
-	self.toRemove = true
+	self.to_remove = true
 end
 
 function Entity:getGM()
@@ -23,7 +23,7 @@ function Entity:getRad()
 end
 
 function Entity:shouldRemove()
-	return self.toRemove
+	return self.to_remove
 end
 
 function Entity:draw()
@@ -36,6 +36,14 @@ end
 
 function Entity:getY()
 	return self.y
+end
+
+function Entity:setX(x)
+	self.x = x
+end
+
+function Entity:setY(y)
+	self.y = y
 end
 
 function Entity:right(amount)

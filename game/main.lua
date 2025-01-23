@@ -12,6 +12,10 @@ function love.update(dt)
 	end
 end
 
+-- function love.keypressed(key)
+--     gm:keyPressed(key)
+-- end
+
 function love.draw()
 	love.graphics.setColor(10, 10, 10)
 	love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)

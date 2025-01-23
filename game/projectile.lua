@@ -3,10 +3,10 @@ local Projectile = Entity:extend()
 local collision = require "collision"
 local speed = 100
 
-function Projectile:new(x, y, xVel, yVel, gm)
+function Projectile:new(x, y, x_vel, y_vel, gm)
 	Projectile.super.new(self, x, y, 1, "projectile", gm)
-	self.xVel = xVel
-	self.yVel = yVel
+	self.x_vel = x_vel
+	self.y_vel = y_vel
 end
 
 function Projectile:draw()
@@ -15,15 +15,23 @@ function Projectile:draw()
 end
 
 function Projectile:update(dt)
-	self:left(self.xVel * speed * dt)
-	self:up(self.yVel * speed * dt)
+	self:left(self.x_vel * speed * dt)
+	self:up(self.y_vel * speed * dt)
+	self:checkBounds()
+	self:checkCollision()
+end
+
+function Projectile:checkBounds()
 	if self:getX() < 0 or self:getX() > love.graphics.getWidth() then
-		-- self:banish()
-		self.xVel = -self.xVel
+		self:banish()
+		self.x_vel = -self.x_vel
 	elseif self:getY() < 0 or self:getY() > love.graphics.getHeight() then
-		-- self:banish()
-		self.yVel = -self.yVel
+		self:banish()
+		self.y_vel = -self.y_vel
 	end
+end
+
+function Projectile:checkCollision()
 	if collision.spheres(self:getGM():getPlayer(), self) then
 		self:banish()
 	end

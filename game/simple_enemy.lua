@@ -6,14 +6,27 @@ local cooldown_length = 1
 
 function SimpleEnemy:new(x, y, gm)
 	SimpleEnemy.super.new(self, x, y, 10, "simple enemy", gm)
-	self.xVel = 0.25
-	self.yVel = 0.75
+	self.x_vel = 0.25
+	self.y_vel = 0.75
 	self.cooldown = cooldown_length
+	self.is_enemy = true
+	self.hp = 5
 end
 
 function SimpleEnemy:draw()
-	love.graphics.setColor(100, 0, 0)
+	if self.hp > 2 then
+		love.graphics.setColor(1, 0, 0)
+	else
+		love.graphics.setColor(0.7, 0, 0)
+	end
 	love.graphics.circle("line", self:getX(), self:getY(), 10)
+end
+
+function SimpleEnemy:take_damage(amt)
+	self.hp = self.hp - amt
+	if self.hp <= 0 then
+		self:banish()
+	end
 end
 
 function SimpleEnemy:update(dt)
@@ -30,13 +43,23 @@ function SimpleEnemy:update(dt)
 		self.gm:addEntity(Projectile(self:getX(), self:getY(), cos * -2, sin * -2, self:getGM()))
 		self.cooldown = cooldown_length
 	end
-	self:left(self.xVel * speed * dt)
-	self:up(self.yVel * speed * dt)
-	if self:getX() < 0 or self:getX() > love.graphics.getWidth() then
-		self.xVel = -self.xVel
+	self:left(self.x_vel * speed * dt)
+	self:up(self.y_vel * speed * dt)
+	if self:getX() < 0 then
+		self:setX(0)
+		self.x_vel = -self.x_vel
 	end
-	if self:getY() < 0 or self:getY() > love.graphics.getHeight() then
-		self.yVel = -self.yVel
+	if self:getY() < 0 then
+		self:setY(0)
+		self.y_vel = -self.y_vel
+	end
+	if self:getX() > love.graphics.getWidth() then
+		self:setX(love.graphics.getWidth())
+		self.x_vel = -self.x_vel
+	end
+	if self:getY() > love.graphics.getHeight() then
+		self:setY(love.graphics.getHeight())
+		self.y_vel = -self.y_vel
 	end
 end
 
