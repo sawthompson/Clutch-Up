@@ -1,13 +1,13 @@
 local Object = require("classic")
 local Entity = Object:extend()
 
-function Entity:new(x, y, rad, name, gm)
+function Entity:new(x, y, hitbox_rad, name, gm)
 	self.x = x
 	self.y = y
 	self.to_remove = false;
 	self.name = name
 	self.gm = gm
-	self.rad = rad
+	self.rad = hitbox_rad
 end
 
 function Entity:banish()
