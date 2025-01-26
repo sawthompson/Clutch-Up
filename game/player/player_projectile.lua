@@ -1,6 +1,6 @@
-local Projectile = require "projectile"
+local Projectile = require "core.projectile"
 local PlayerProjectile = Projectile:extend()
-local collision = require "collision"
+local collision = require "libraries.collision"
 
 function PlayerProjectile:new(x, y, x_vel, y_vel, gm)
 	PlayerProjectile.super.new(self, x, y, x_vel, y_vel, gm)

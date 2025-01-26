@@ -1,6 +1,6 @@
-local Entity = require "entity"
+local Entity = require "core.entity"
 local Projectile = Entity:extend()
-local collision = require "collision"
+local collision = require "libraries.collision"
 local speed = 100
 
 function Projectile:new(x, y, x_vel, y_vel, gm)

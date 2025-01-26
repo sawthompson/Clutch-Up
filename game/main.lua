@@ -1,7 +1,7 @@
 local gm
 
 function love.load()
-	local GameManager = require "game_manager"
+	local GameManager = require "core/game_manager"
 	gm = GameManager()
 end
 

@@ -1,9 +1,9 @@
-local Entity = require "entity"
+local Entity = require "core.entity"
 local Player = Entity:extend()
 local speed = 100
-local shot_cooldown_start = 0.1
+local shot_cooldown_start = 0.5
 local shot_cooldown = shot_cooldown_start
-local PlayerProjectile = require "player_projectile"
+local PlayerProjectile = require "player.player_projectile"
 
 function Player:new(gm)
 	Player.super.new(self, 100, 100, 10, "player", gm)

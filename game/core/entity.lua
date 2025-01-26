@@ -1,4 +1,4 @@
-local Object = require("classic")
+local Object = require("libraries.classic")
 local Entity = Object:extend()
 
 function Entity:new(x, y, hitbox_rad, name, gm)

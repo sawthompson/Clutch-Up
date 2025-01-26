@@ -1,9 +1,20 @@
-local BaseEnemy = require "base_enemy"
-local Projectile = require "projectile"
+local BaseEnemy = require "enemy.base_enemy"
+local Projectile = require "core.projectile"
 local SimpleEnemy = BaseEnemy:extend()
 
 function SimpleEnemy:new(x, y, gm)
-	SimpleEnemy.super.new(self, {x=x, y=y, radius=10, gm=gm, x_vel=0.25, y_vel=0.75, cooldown_length=1, max_hp=5, speed=100})
+	SimpleEnemy.super.new(self, 
+	{
+		x=x,
+		y=y,
+		radius=10,
+		gm=gm,
+		x_vel=0.25,
+		y_vel=0.75,
+		cooldown_length=1,
+		max_hp=5,
+		speed=100
+	})
 end
 
 -- Default firing behavior. Fire in direction faced
@@ -17,7 +28,6 @@ function SimpleEnemy:fire()
 		local sin = math.sin(angle)
 
 		self.gm:addEntity(Projectile(self:getX(), self:getY(), cos * -2, sin * -2, self:getGM()))
-		self.cooldown = self.cooldown_length
 end
 
 return SimpleEnemy

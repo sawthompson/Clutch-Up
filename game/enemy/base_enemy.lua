@@ -1,5 +1,5 @@
-local Entity = require "entity"
-local Projectile = require "projectile"
+local Entity = require "core.entity"
+local Projectile = require "core.projectile"
 local BaseEnemy = Entity:extend()
 
 function BaseEnemy:new(args)
@@ -15,7 +15,7 @@ function BaseEnemy:new(args)
 end
 
 function BaseEnemy:draw()
-	if self.hp > self.max_hp * 0.333 then
+	if self.hp >= self.max_hp * 0.4 then
 		self:draw_healthy()
 	else
 		self:draw_wounded()
@@ -24,12 +24,12 @@ end
 
 function BaseEnemy:draw_healthy()
 	love.graphics.setColor(1, 0, 0)
-	love.graphics.circle("line", self:getX(), self:getY(), 10)
+	love.graphics.circle("line", self:getX(), self:getY(), self.rad)
 end
 
 function BaseEnemy:draw_wounded()
 	love.graphics.setColor(0.7, 0, 0)
-	love.graphics.circle("line", self:getX(), self:getY(), 10)
+	love.graphics.circle("line", self:getX(), self:getY(), self.rad)
 end
 
 function BaseEnemy:take_damage(amt)
